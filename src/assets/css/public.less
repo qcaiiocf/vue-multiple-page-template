@@ -1,0 +1,341 @@
+// 全局样式的less文件
+div{
+    box-sizing: border-box;
+}
+// 颜色
+@p-red-color: #ff4949;
+@p-blue-color: #409EFF;
+@p-base-color:rgb(48, 44, 41);
+@p-gray-color:#999999;
+@p-border-color: rgba(236, 236, 236, 1);
+@p-active-color: #409EFF;
+.p-color-active {
+    color: @p-active-color;
+}
+.p-gray {
+  color: @p-gray-color;
+  font-size: .9em;
+  vertical-align: middle;
+}
+.p-red {
+  color: @p-red-color;
+  vertical-align: middle;
+}
+.p-blue {
+  color: @p-blue-color;
+  vertical-align: middle;
+}
+// 字体
+.p-ft10{
+    font-size: .625rem;
+}
+.p-ft11{
+    font-size: .6875rem;
+}
+.p-ft12{
+    font-size: .75rem;
+}
+.p-ft13{
+    font-size: .8125rem;
+}
+.p-ft14{
+    font-size: .875rem;
+}
+.p-ft15{
+    font-size: .9375rem;
+}
+.p-ft16{
+    font-size: 1rem;
+}
+.p-ft17{
+    font-size: 1.0625rem;
+}
+.p-ft18{
+    font-size: 1.125rem;
+}
+
+// 溢出时显示省略符号来代表被修剪的文本
+.p-overflow-elp{
+    overflow: hidden;
+    text-overflow: -o-ellipsis-lastline;
+    text-overflow: ellipsis;
+    white-space:nowrap; 
+};
+// 多行溢出时显示省略符号来代表被修剪的文本
+.p-overflow-elp-clm(@num : 2){
+    overflow: hidden;
+    text-overflow: -o-ellipsis-lastline;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp:@num;
+    line-clamp:@num;
+    -webkit-box-orient: vertical;
+};
+.p-overflow-elp-clm{
+  .p-overflow-elp-clm();
+}
+// flex盒子及相关
+.p-flex{
+    display: -webkit-box; /* Chrome 4+, Safari 3.1, iOS Safari 3.2+ */
+    display: -moz-box; /* Firefox 17- */
+    display: -webkit-flex; /* Chrome 21+, Safari 6.1+, iOS Safari 7+, Opera 15/16 */
+    display: -moz-flex; /* Firefox 18+ */
+    display: -ms-flexbox; /* IE 10 */
+    display: flex; /* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4+ */
+}
+.p-flex-column{
+    flex-direction: column;
+}
+.p-flex-row-reverse{
+  flex-direction: row-reverse;
+}
+.p-justify-center{
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+.p-align-center{
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.p-flex-grow{
+    .p-flex-grow();
+}
+.p-flex-grow(@num : 1){
+    -webkit-box-flex: @num;
+    -ms-flex-positive: @num;
+    flex-grow: @num;
+}
+.p-flex-center{
+    .p-flex();
+    .p-align-center();
+    .p-justify-center();
+}
+
+// 动画
+.p-collapse(@time: 0.4s) {
+    transition: all @time linear;
+    -moz-transition: all @time linear;
+    /* Firefox 4 */
+    -webkit-transition: all @time linear;
+    /* Safari and Chrome */
+    -o-transition: all @time linear;
+    /* Opera */
+    // overflow: hidden;
+}
+.p-link{
+    cursor: pointer;
+    .p-color-active();
+}
+.p-islink{
+  cursor: pointer;
+  &:hover{
+    .p-color-active();
+  }
+}
+.p-triangle{
+    border: 6px solid #fff;
+    border-top-width: 0;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-left-color: transparent;
+}
+
+// 下拉框盒子
+.p-dropdown-box{
+    display:  none;
+    padding-top: 10px;
+    position: absolute;
+    width: 100px;
+    top: 100%;
+    left: -50px;
+    z-index: 999;
+}
+.p-card{
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,.2);
+    background: #fff;
+    padding: 5px 0;
+    color: #000;
+    .p-card-item{
+        text-align: center;
+        padding: 5px;
+        &.disabled{
+           color: #bbc1d3;
+           cursor: not-allowed;
+        }
+        &:hover:not(.disabled){
+            background: #ecf5ff;
+            color: #7cb1ff;
+        }
+    }
+    &.triangle {
+        position: relative;
+        &::after{
+            content: '';
+            position: absolute;
+            left: calc(50% - 6px);
+            top: -6px;
+            .p-triangle;
+        }
+    }
+}
+// 按钮
+.p-button{
+  min-width: 2rem;
+  border-radius: .3rem;
+  text-align: center;
+  padding: .3rem .6rem;
+  display: inline-block;
+  line-height: 1;
+  white-space: nowrap;
+  background: #fff;
+  border: .1rem solid #dcdfe6;
+  margin-right: .3rem;
+  cursor: pointer;
+  i{
+    color: inherit;
+  }
+  // 非 禁用/纯文字/朴素 的hover样式
+  &:not(.disabled):not(.text):not(.plain) {
+      &:hover {
+          background-color: #ecf5ff;
+      }
+  }
+  // 非 禁用/纯文字 的hover时样式
+  &:not(.disabled):not(.text){
+      &:hover {
+          color: #409EFF;
+          border-color: #c6e2ff;
+      }
+  }
+  &.active{
+      color: #fff;
+      background-color: #409EFF;
+      border-color: #409EFF;
+  }
+  &.disabled{
+      cursor: not-allowed;
+      color: #c0c4cc;
+      opacity: .8;
+      i {
+          cursor: inherit;
+      }
+  }
+  &.plain{ //朴素按钮
+    text-align: initial;
+  }
+  &.text{
+    cursor: initial;
+  }
+}
+// 统一header盒子
+.p-header{
+    .p-flex;
+    .p-header-left, .p-header-center, .p-header-right {
+        .p-flex;
+        .p-align-center;
+        padding: 0 5px;
+    }
+    .p-header-center{
+        .p-flex-grow();
+    }
+    .p-header-right{
+        justify-content: flex-end;
+    }
+}
+// 头像
+.p-avatar{
+    display: inline-block;
+    width: 1.7rem;
+    height: 1.7rem;
+    font-size: 1.7rem;
+    border-radius: 50%;
+    overflow: hidden;
+    line-height: 0;
+    margin: .1rem;
+    box-sizing: border-box;
+    img{
+        width: 100%;
+        height: 100%;
+    }
+}
+
+// 禁止选中
+.p-user-select-no{
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+
+//暂无数据或没有更多数据
+.p-data-end{
+    font-size: 1rem;
+    width: 100%;
+    text-align: center;
+    height: 3rem;
+    line-height: 3rem;
+    color:@p-gray-color;
+    span{
+        font-size: .875rem;
+    }
+}
+// 锁定盒子
+.p-disable-box {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+  &.active{
+      // background: rgba(0, 0, 0, 0.1);
+      background: rgba(245, 247, 250, 0.5);
+  }
+}
+// 蒙版
+.p-shade {
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    background: rgba(245, 247, 250, 0.95);
+    z-index: 0;
+}
+
+// 透明盒子
+.p-gray-box{
+    .p-gray-box();
+}
+.p-gray-box(@opacity: 0.4){
+    opacity: @opacity;
+}
+
+// 阴影
+.p-box-shadow(@val: 0 .1rem .8rem 0 rgba(0, 0, 0, .1)){
+    box-shadow: @val;
+}
+.p-link{
+    cursor: pointer;
+    .p-color-active();
+}
+.p-islink{
+  cursor: pointer;
+  &:hover{
+    .p-color-active();
+  }
+}
+.p-cursor{
+  cursor: pointer;
+}
+.p-dot{
+    width: 5px;
+    height: 5px;
+    background-color: #999999;
+    border-radius: 50%;
+    display: inline-block;
+    overflow: hidden;
+    margin-right: 5px;
+}
