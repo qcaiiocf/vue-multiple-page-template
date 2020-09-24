@@ -86,7 +86,9 @@ class HttpRequest {
         )
     }
     request(options) {
-        const instance = axios.create();
+        const instance = axios.create({
+            timeout: 20e3
+        });
         const loginAuthorization = (options.params && options.params.loginAuthorization) ? options.params.loginAuthorization : '';
         options = Object.assign(this.getInsideConfig(), options);
         let isWriteToken = true; //是否可以写 token

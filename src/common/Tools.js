@@ -364,7 +364,7 @@ class Tools {
    * 判断对象是否有指定key
    */
   static hasKey(obj = {}, key = '') {
-    for (const key1 of obj) {
+    for (const key1 in obj) {
       if (key1 === key) {
         return true;
       }
