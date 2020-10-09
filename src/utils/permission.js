@@ -31,7 +31,7 @@ export function vueRegisterFun(App, modules, tagName, option = {}) {
       if (hasRole) {
         next();
       } else {
-        const routes = await store.dispatch('role/getInfo', { modules, tagName });
+        const routes = await store.dispatch('role/getInfo', { modules, tagName, getRolesData: option.getRolesData });
         console.log('routes: ', routes);
         router.addRoutes(routes);
         next({ ...to, replace: true })

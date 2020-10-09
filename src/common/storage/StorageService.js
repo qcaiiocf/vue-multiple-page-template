@@ -1,7 +1,7 @@
-import Chat from "@/utils/Chat";
+import Tools from '@/common/Tools'
 export default {
     keyData: {
-        local: ['topicModeIds', 'chat_group', 'chatToken', 'chat_token', 'userToken', 'jumpUrl', 'details_vdr_config', 'note_vdr_config', 'config_playSound', 'note_config', 'details_config', 'openGroupId', 'openIds', 'all_storage'],
+        local: ['topicModeIds'],
         session: []
     },
     getKey(key, id = '') {
@@ -27,7 +27,7 @@ export default {
     setData(key, data, id) {
         const storage_key = this.getKey(key, id);
         if (!storage_key) return;
-        if (Chat.checkDataType(data) === 'object' || Chat.checkDataType(data) === 'array') {
+        if (Tools.checkDataType(data) === 'object' || Tools.checkDataType(data) === 'array') {
             data = JSON.stringify(data);
         }
         if (this.keyData.local.indexOf(key) > -1) {
@@ -39,7 +39,7 @@ export default {
         return true;
     },
     removeData(key, data, id) {
-        const dataType = Chat.checkDataType(key);
+        const dataType = Tools.checkDataType(key);
         if (dataType === 'string') {
             if (key === 'all') {
                 this.keyData.local.map(item => {
@@ -66,7 +66,7 @@ export default {
                 }
             }
         }
-        if (Chat.checkDataType(key) === 'array') {
+        if (Tools.checkDataType(key) === 'array') {
             key.map(item => {
                 const storage_key = this.getKey(item, id);
                 if (storage_key) {

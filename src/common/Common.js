@@ -3,6 +3,7 @@ import Tools from './Tools'
     需要挂载到app的函数
 */
 class Common {
+  testFun() { return '' }
 }
 Object.assign(Common.prototype, {
   clone: Tools.clone,

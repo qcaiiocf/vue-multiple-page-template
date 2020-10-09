@@ -3,13 +3,6 @@ import Tools from './Tools';
     实用函数,大多与业务相关
 */
 class Utils {
-  static loginOut() {
-    // AuthService.removeToken();
-    // if (this.isLocal()) {
-    //     return;
-    // }
-    // window.location.href = config.getBaseUrl() + '/loginOut';
-  }
   static showMessage() {
   }
   // send actions

@@ -18,6 +18,24 @@ class Tools {
   static isArray(arr) {
     return Object.prototype.toString.call(arr) === '[object Array]';
   }
+  // 判断数据类型
+  checkDataType(data) {
+    let type = typeof data;
+    if (type === 'object') {
+      const dataType = Object.prototype.toString.call(data);
+      switch (dataType) {
+        case "[object Object]":
+          type = 'object';
+          break;
+        case "[object Array]":
+          type = 'array';
+          break;
+        default:
+          break
+      }
+    }
+    return type;
+  }
   // 判断变量是否为空  true 空 false 有值  支持任何类型
   static isEmpty($var) {
     if ($var) {
@@ -476,16 +494,16 @@ class Tools {
   }
   //延迟代码执行
   static codeDelayRun(callBack = null, key = '', time = 500) {
-      const codeKeyTime = this.codeKeyTime;
-      if (codeKeyTime[key]) {
-          clearTimeout(codeKeyTime[key]);
-          codeKeyTime[key] = null;
-      }
-      if (callBack) {
-          codeKeyTime[key] = setTimeout(function() {
-              callBack();
-          }, time);
-      }
+    const codeKeyTime = this.codeKeyTime;
+    if (codeKeyTime[key]) {
+      clearTimeout(codeKeyTime[key]);
+      codeKeyTime[key] = null;
+    }
+    if (callBack) {
+      codeKeyTime[key] = setTimeout(function() {
+        callBack();
+      }, time);
+    }
   }
 }
 export default Tools;

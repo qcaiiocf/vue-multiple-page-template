@@ -11,16 +11,18 @@ const state = {
 const getters = setGetters(state);
 const mutations = setMutations(state);
 const actions = {
-    async getInfo({ commit, dispatch }, { modules, tagName }) {
+    async getInfo({ commit, dispatch }, { modules, tagName, getRolesData }) {
         const roles = ['admin'];
         let routes = [];
         let rolesMenu = [];
         // 获取路由权限
-        const res = await dispatch('getRolesData');
-        console.log('res: ', res);
-        if (res && res.code == 200) {
-            rolesMenu = res;
-            commit('setRolesMenu', rolesMenu);
+        let res;
+        if (getRolesData) {
+            res = await dispatch('getRolesData');
+            if (res && res.code == 200) {
+                rolesMenu = res;
+                commit('setRolesMenu', rolesMenu);
+            }
         }
         commit('setRoles', roles);
         // 本地route
@@ -33,7 +35,7 @@ const actions = {
         routesLocal = routesLocal ? routesLocal.default : [];
         // 额外route
         const routesOther = [
-            { path: '/404', component: () => import('@/components/page404'), hidden: true },
+            { path: '/404', component: () => import('@/components/Page404/index.vue'), hidden: true },
             { path: '*', redirect: '/404', hidden: true }
         ]
         // 合并
